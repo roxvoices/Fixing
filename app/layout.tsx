@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  <meta name="google-site-verification" content="9kGcR3N1rWZivdqcsjIG95G4RzRtRo_ReJuSwqY3Tg8" />
   title: {
     default: 'FixMyDevice — Fix Your Device Like a Professional',
     template: '%s | FixMyDevice',
@@ -14,6 +13,9 @@ export const metadata: Metadata = {
     siteName: 'FixMyDevice',
     type: 'website',
     url: 'https://fixmydevice.com',
+  },
+  verification: {
+    google: '9kGcR3N1rWZivdqcsjIG95G4RzRtRo_ReJuSwqY3Tg8',
   },
   robots: {
     index: true,

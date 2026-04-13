@@ -6,9 +6,9 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: '/admin',
+        disallow: ['/admin', '/search'],
       },
     ],
-    sitemap: 'https://fixmydevice.com/sitemap.xml',
+    sitemap: 'https://fixmydevice.vercel.app/sitemap.xml',
   }
 }

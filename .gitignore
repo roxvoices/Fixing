@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Next.js build output
+.next/
+out/
+
+# Generated at build time — do NOT commit these
+# generate-sitemaps.mjs creates them fresh every Vercel deploy
+public/sitemap.xml
+public/sitemap-1.xml
+public/sitemap-2.xml
+public/sitemap-3.xml
+public/sitemap-4.xml
+public/sitemap-5.xml
+
+# Misc
+.DS_Store
+*.pem
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+npm-debug.log*

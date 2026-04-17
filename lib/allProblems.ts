@@ -174,3 +174,4 @@ export const ALL_PROBLEMS = [
 export const PROBLEMS_BY_SLUG = new Map(
   ALL_PROBLEMS.map(p => [p.slug, p])
 )
+console.log("TOTAL PROBLEMS LOADED:", ALL_PROBLEMS.length)

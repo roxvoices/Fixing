@@ -5,7 +5,7 @@ import { fileURLToPath } from "url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const BASE_URL = "https://fixmydevice.vercel.app";
-const MAX_URLS = 1000; // smaller chunks
+const MAX_URLS = 1000;
 
 const PUBLIC_DIR = path.join(__dirname, "public");
 const LIB_DIR = path.join(__dirname, "lib");
@@ -18,6 +18,7 @@ const TODAY = new Date().toISOString().split("T")[0];
 
 console.log("Reading problem slugs...");
 
+// Get problem slugs
 const files = fs
   .readdirSync(LIB_DIR)
   .filter(f => f.startsWith("data") && f.endsWith(".ts"));
@@ -57,6 +58,31 @@ ${entries.map(e => `
 </urlset>`;
 }
 
+// MAIN PAGES
+const mainPages = [
+  { loc: `${BASE_URL}/`, changefreq: "daily", priority: "1.0" },
+  { loc: `${BASE_URL}/about`, changefreq: "monthly", priority: "0.5" },
+  { loc: `${BASE_URL}/contact`, changefreq: "monthly", priority: "0.5" },
+  { loc: `${BASE_URL}/request-fix`, changefreq: "monthly", priority: "0.6" },
+
+  // Categories
+  { loc: `${BASE_URL}/category/phone-problems`, changefreq: "weekly", priority: "0.9" },
+  { loc: `${BASE_URL}/category/laptop-problems`, changefreq: "weekly", priority: "0.9" },
+  { loc: `${BASE_URL}/category/internet-problems`, changefreq: "weekly", priority: "0.9" },
+  { loc: `${BASE_URL}/category/app-problems`, changefreq: "weekly", priority: "0.9" },
+  { loc: `${BASE_URL}/category/cloud-services`, changefreq: "weekly", priority: "0.9" },
+  { loc: `${BASE_URL}/category/gaming-problems`, changefreq: "weekly", priority: "0.9" },
+  { loc: `${BASE_URL}/category/smart-home`, changefreq: "weekly", priority: "0.9" },
+  { loc: `${BASE_URL}/category/email-problems`, changefreq: "weekly", priority: "0.9" },
+  { loc: `${BASE_URL}/category/website-problems`, changefreq: "weekly", priority: "0.9" },
+  { loc: `${BASE_URL}/category/social-media`, changefreq: "weekly", priority: "0.9" },
+  { loc: `${BASE_URL}/category/security-problems`, changefreq: "weekly", priority: "0.9" }
+].map(p => ({
+  ...p,
+  lastmod: TODAY
+}));
+
+// Chunk problem pages
 const chunks = [];
 
 for (let i = 0; i < slugs.length; i += MAX_URLS) {
@@ -73,6 +99,10 @@ for (let i = 0; i < slugs.length; i += MAX_URLS) {
   chunks.push(part);
 }
 
+// Add main pages to first sitemap
+chunks.unshift(mainPages);
+
+// Write sitemap files
 chunks.forEach((entries, i) => {
 
   const filename = `sitemap-${i + 1}.xml`;
@@ -85,6 +115,7 @@ chunks.forEach((entries, i) => {
   console.log(`Created ${filename}`);
 });
 
+// Create sitemap index
 const indexXml = `<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${chunks.map((_, i) => `
@@ -100,4 +131,4 @@ fs.writeFileSync(
   indexXml
 );
 
-console.log("Sitemaps done.");
+console.log("All sitemaps generated successfully.");

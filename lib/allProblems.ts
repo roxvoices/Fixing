@@ -173,5 +173,5 @@ export const ALL_PROBLEMS = [
 // Quick lookup map: slug → problem (O(1) instead of O(n) array scan)
 export const PROBLEMS_BY_SLUG = new Map(
   ALL_PROBLEMS.map(p => [p.slug, p])
-)
+) 
 console.log("TOTAL PROBLEMS LOADED:", ALL_PROBLEMS.length)
